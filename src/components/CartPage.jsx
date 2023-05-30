@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import {Row, Col, Table, Button} from 'react-bootstrap'
 import {app} from '../firebaseInit'
 import { getDatabase, ref, onValue, remove } from 'firebase/database'
+import Book from './Book';
 
 const CartPage = () => {
     const uid = sessionStorage.getItem('uid');
@@ -42,6 +43,7 @@ const CartPage = () => {
                         <tr>
                             <td>제목</td>
                             <td>가격</td>
+                            <td>보기</td>
                             <td>삭제</td>
                         </tr>
                     </thead>
@@ -50,6 +52,7 @@ const CartPage = () => {
                             <tr key={book.key}>
                                 <td>{book.title}</td>
                                 <td>{book.price}</td>
+                                <td><Book book = {book}/></td>
                                 <td><Button className='btn-sm' variant='danger' onClick={()=> onRemove(book.key)}>삭제</Button></td>
                             </tr>
                         )}
